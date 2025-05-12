@@ -10,16 +10,28 @@ st.title("SVC RBF + SelectKBest Tahmin Uygulaması")
 st.write("En iyi 8 özellik ile sınıflandırma yapar.")
 
 # Girişleri al
+# credit_score = st.number_input("Credit Score", value=650)
+# geography = st.selectbox("Geography", ["France", "Spain", "Germany"])
+# gender = st.selectbox("Gender", ["Male", "Female"])
+# age = st.number_input("Age", value=35)
+# tenure = st.number_input("Tenure", value=5)
+# balance = st.number_input("Balance", value=50000.0)
+# num_of_products = st.number_input("Number of Products", value=1)
+# has_cr_card = st.selectbox("Has Credit Card?", [0, 1])
+# is_active = st.selectbox("Is Active Member?", [0, 1])
+# salary = st.number_input("Estimated Salary", value=60000.0)
+
+# örnek 2
 credit_score = st.number_input("Credit Score", value=650)
 geography = st.selectbox("Geography", ["France", "Spain", "Germany"])
 gender = st.selectbox("Gender", ["Male", "Female"])
-age = st.number_input("Age", value=35)
-tenure = st.number_input("Tenure", value=5)
-balance = st.number_input("Balance", value=50000.0)
+age = st.number_input("Age", value=42)
+tenure = st.number_input("Tenure", value=2)
+balance = st.number_input("Balance", value=0.0)
 num_of_products = st.number_input("Number of Products", value=1)
-has_cr_card = st.selectbox("Has Credit Card?", [0, 1])
-is_active = st.selectbox("Is Active Member?", [0, 1])
-salary = st.number_input("Estimated Salary", value=60000.0)
+has_cr_card = st.selectbox("Has Credit Card?", [0, 1], index=1)
+is_active = st.selectbox("Is Active Member?", [0, 1], index=1)
+salary = st.number_input("Estimated Salary", value=101348.88)
 
 # Encode input
 geo_france = 1 if geography == "France" else 0
@@ -43,11 +55,16 @@ input_array = np.array([[
 # Tahmin butonu
 if st.button("Tahmin Et"):
     # Model 8 özelliğe göre eğitildiyse sadece o kısımları seç
-    # Örneğin aşağıdaki gibi slice kullanabilirsin:
     input_selected = input_array[:, :8]  # Sadece ilk 8 özelliği aldı (k=8 için)
 
     prediction = model.predict(input_selected)[0]
     probability = model.predict_proba(input_selected)[0]
 
     st.write(f"**Tahmin (Exited):** {prediction}")
-    st.write(f"**Olasılıklar [Kalmadı, Çıktı]:** {probability}")
+
+    if prediction == 1:
+        st.write("Müşteri ayrılacak.")
+    else:
+        st.write("Müşteri ayrılmayacak.")
+
+    # st.write(f"**Olasılıklar [Kalmadı, Çıktı]:** {probability}")
