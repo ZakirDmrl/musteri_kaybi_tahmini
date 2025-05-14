@@ -7,7 +7,7 @@ with open('best_model.pkl', 'rb') as f:
     model = pickle.load(f)
 
 st.title("SVC RBF + SelectKBest Tahmin Uygulaması")
-st.write("En iyi 8 özellik ile sınıflandırma yapar.")
+st.write("En iyi 10 özellik ile sınıflandırma yapar.")
 
 # Girişleri al
 # credit_score = st.number_input("Credit Score", value=650)
